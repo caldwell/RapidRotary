@@ -457,7 +457,12 @@ public class GlobalFileConverterSwingWorker extends SwingWorker<Object, String>
             {
                 String gCodeStr = lineParts.get(i).substring(1);
                 // convert to int
-                int gCode = new Integer(gCodeStr).intValue();
+                int gCode;
+                try {
+                    gCode = new Integer(gCodeStr).intValue();
+                } catch(Exception e) {
+                    continue;
+                }
 
                 if (gCode == 94) // G94 (Feed Rate Mode: units per minute)
                 {
